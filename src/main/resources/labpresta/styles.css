@@ -1,0 +1,80 @@
+/* Estilos de LabPresta */
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f4f6f9;
+}
+
+/* Barra de menú */
+.menu-bar {
+    -fx-background-color: #1f3b5a;
+}
+.menu-bar .label {
+    -fx-text-fill: white;
+}
+.menu-item .label {
+    -fx-text-fill: #1f3b5a;
+}
+.menu:hover, .menu:showing {
+    -fx-background-color: #2e5583;
+}
+
+/* Títulos */
+.titulo {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f3b5a;
+}
+.subtitulo {
+    -fx-font-size: 15px;
+    -fx-text-fill: #6b7a8c;
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #2e7dd7;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+.button:hover {
+    -fx-background-color: #1f63b0;
+}
+.button:pressed {
+    -fx-background-color: #174a85;
+}
+
+/* Barra de estado */
+.barra-estado {
+    -fx-background-color: #e3e8ee;
+    -fx-text-fill: #45556a;
+    -fx-padding: 4 10;
+    -fx-font-size: 12px;
+}
+
+/* Pantalla de inicio más grande */
+.tarjeta {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-padding: 40 60;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);
+}
+.titulo {
+    -fx-font-size: 40px;
+}
+.subtitulo {
+    -fx-font-size: 17px;
+    -fx-padding: 0 0 15 0;
+}
+.boton-grande {
+    -fx-pref-width: 360;
+    -fx-pref-height: 60;
+    -fx-font-size: 20px;
+}
+.ayuda {
+    -fx-font-size: 13px;
+    -fx-text-fill: #8a97a8;
+    -fx-padding: -12 0 4 0;
+}

@@ -18,6 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 700, 450);
+        scene.getStylesheets().add(App.class.getResource("styles.css").toExternalForm());
         stage.setTitle("LabPresta - Préstamo de equipos del laboratorio");
         stage.setScene(scene);
         stage.show();
