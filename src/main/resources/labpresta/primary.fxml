@@ -9,7 +9,6 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="raiz" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="labpresta.PrimaryController">
@@ -40,24 +39,23 @@
 
     <!-- Panel central: pantalla de inicio -->
     <center>
-        <VBox fx:id="panelInicio" alignment="TOP_CENTER" spacing="10">
-            <padding><Insets top="30"/></padding>
-            <Label text="LabPresta">
-                <font><Font name="Arial Bold" size="24"/></font>
-            </Label>
-            <Label text="Laboratorio de computación">
-                <VBox.margin><Insets bottom="20"/></VBox.margin>
-            </Label>
-            <Button text="Equipos" prefWidth="200" onAction="#abrirEquipos"/>
-            <Button text="Usuarios" prefWidth="200" onAction="#abrirUsuarios"/>
-            <Button text="Préstamos" prefWidth="200" onAction="#abrirNuevoPrestamo"/>
+        <VBox fx:id="panelInicio" alignment="CENTER">
+            <VBox styleClass="tarjeta" alignment="CENTER" spacing="18" maxWidth="520">
+                <Label text="LabPresta" styleClass="titulo"/>
+                <Label text="Préstamo de equipos del laboratorio de computación" styleClass="subtitulo"/>
+                <Button text="💻  Equipos" styleClass="boton-grande" onAction="#abrirEquipos"/>
+                <Label text="Registrar equipos y cambiar su estado" styleClass="ayuda"/>
+                <Button text="👤  Usuarios" styleClass="boton-grande" onAction="#abrirUsuarios"/>
+                <Label text="Registrar y buscar estudiantes y docentes" styleClass="ayuda"/>
+                <Button text="📋  Préstamos" styleClass="boton-grande" onAction="#abrirNuevoPrestamo"/>
+                <Label text="Prestar y recibir equipos" styleClass="ayuda"/>
+            </VBox>
         </VBox>
     </center>
 
     <!-- Barra de estado -->
     <bottom>
-        <Label fx:id="lblEstado" text="Listo" maxWidth="Infinity"
-               style="-fx-border-color: lightgray; -fx-padding: 3;"/>
+           <Label fx:id="lblEstado" text="Menu" maxWidth="Infinity" styleClass="barra-estado"/>
     </bottom>
 </BorderPane>
 
