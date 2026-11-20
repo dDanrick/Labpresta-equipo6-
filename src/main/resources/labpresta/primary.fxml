@@ -1,16 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labpresta.PrimaryController">
-   <children>
-      <Label text="Primary View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+<BorderPane fx:id="raiz" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="labpresta.PrimaryController">
+
+    <!-- Barra de menú -->
+    <top>
+        <MenuBar>
+            <Menu text="Archivo">
+                <MenuItem text="Inicio" onAction="#mostrarInicio"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Salir" onAction="#salir"/>
+            </Menu>
+            <Menu text="Equipos">
+                <MenuItem text="Registrar y ver equipos" onAction="#abrirEquipos"/>
+            </Menu>
+            <Menu text="Usuarios">
+                <MenuItem text="Registrar y buscar usuarios" onAction="#abrirUsuarios"/>
+            </Menu>
+            <Menu text="Préstamos">
+                <MenuItem text="Nuevo préstamo" onAction="#abrirNuevoPrestamo"/>
+                <MenuItem text="Registrar devolución" onAction="#abrirDevolucion"/>
+            </Menu>
+            <Menu text="Ayuda">
+                <MenuItem text="Acerca de" onAction="#acercaDe"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <!-- Panel central: pantalla de inicio -->
+    <center>
+        <VBox fx:id="panelInicio" alignment="TOP_CENTER" spacing="10">
+            <padding><Insets top="30"/></padding>
+            <Label text="LabPresta">
+                <font><Font name="Arial Bold" size="24"/></font>
+            </Label>
+            <Label text="Laboratorio de computación">
+                <VBox.margin><Insets bottom="20"/></VBox.margin>
+            </Label>
+            <Button text="Equipos" prefWidth="200" onAction="#abrirEquipos"/>
+            <Button text="Usuarios" prefWidth="200" onAction="#abrirUsuarios"/>
+            <Button text="Préstamos" prefWidth="200" onAction="#abrirNuevoPrestamo"/>
+        </VBox>
+    </center>
+
+    <!-- Barra de estado -->
+    <bottom>
+        <Label fx:id="lblEstado" text="Listo" maxWidth="Infinity"
+               style="-fx-border-color: lightgray; -fx-padding: 3;"/>
+    </bottom>
+</BorderPane>
+
