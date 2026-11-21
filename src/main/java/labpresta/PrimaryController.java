@@ -10,6 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import labpresta.modelo.Equipo;
 
 public class PrimaryController {
 
@@ -25,7 +30,17 @@ public class PrimaryController {
 
     @FXML
     private void abrirEquipos() {
-        mostrarMarcador("Equipos", "HU-C1 Registrar equipos");
+        try {
+            FXMLLoader loader = new FXMLLoader(PrimaryController.class.getResource("EquipoFormulario.fxml"));
+            Parent formulario = loader.load();
+            EquipoFormularioController controlador = loader.getController();
+            controlador.setEquipos(equipos);
+            raiz.setCenter(formulario);
+            lblEstado.setText("Equipos");
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblEstado.setText("Error: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -56,6 +71,10 @@ public class PrimaryController {
     private void salir() {
         Platform.exit();
     }
+    
+    private final List<Equipo> equipos = new ArrayList<>();
+
+
 
     /** Reemplaza el panel central por un marcador de la pantalla que irá ahí. */
     private void mostrarMarcador(String titulo, String historia) {
