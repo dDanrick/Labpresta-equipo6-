@@ -37,7 +37,7 @@ public class ValidadorEquipo {
 
         String codigoNormalizado = codigo.trim();
         if (existeCodigo(codigoNormalizado, existentes)) {
-            return "Ya existe un equipo registrado con el codigo '" + codigoNormalizado.toUpperCase() + "'.";
+            return "Código del equipo existente '" + codigoNormalizado.toUpperCase() + "'.";
         }
 
         return null;

@@ -44,7 +44,7 @@ public class EquipoFormularioController {
         equipos.add(equipo);
         // Pendiente (tarea de guardado): escribir la lista en equipos.csv.
 
-        mostrarMensaje("Equipo " + equipo.getCodigo() + " registrado como " + equipo.getEstado() + ".");
+        mostrarMensaje("Equipo registrado correctamente.");
         limpiar();
     }
 
