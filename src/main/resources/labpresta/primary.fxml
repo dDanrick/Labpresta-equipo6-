@@ -9,6 +9,8 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane fx:id="raiz" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="labpresta.PrimaryController">
@@ -39,19 +41,24 @@
 
     <!-- Panel central: pantalla de inicio -->
     <center>
-        <VBox fx:id="panelInicio" alignment="CENTER">
-            <VBox styleClass="tarjeta" alignment="CENTER" spacing="18" maxWidth="520">
-                <Label text="LabPresta" styleClass="titulo"/>
-                <Label text="Préstamo de equipos del laboratorio de computación" styleClass="subtitulo"/>
-                <Button text="💻  Equipos" styleClass="boton-grande" onAction="#abrirEquipos"/>
-                <Label text="Registrar equipos y cambiar su estado" styleClass="ayuda"/>
-                <Button text="👤  Usuarios" styleClass="boton-grande" onAction="#abrirUsuarios"/>
-                <Label text="Registrar y buscar estudiantes y docentes" styleClass="ayuda"/>
-                <Button text="📋  Préstamos" styleClass="boton-grande" onAction="#abrirNuevoPrestamo"/>
-                <Label text="Prestar y recibir equipos" styleClass="ayuda"/>
-            </VBox>
+    <StackPane>
+        <VBox fx:id="panelInicio" styleClass="tarjeta" alignment="CENTER" spacing="22" maxWidth="520" maxHeight="-Infinity">
+            <padding>
+                <Insets top="35" right="40" bottom="35" left="40"/>
+            </padding>
+
+            <Label text="LabPresta" styleClass="titulo"/>
+            <Label text="Préstamo de equipos del laboratorio de computación"
+                styleClass="subtitulo" wrapText="true"
+                textAlignment="CENTER" alignment="CENTER"
+                maxWidth="440" minHeight="-Infinity"/>
+
+            <Button text="💻  Equipos" styleClass="boton-grande" onAction="#abrirEquipos"/>
+            <Button text="👤  Usuarios" styleClass="boton-grande" onAction="#abrirUsuarios"/>
+            <Button text="📋  Préstamos" styleClass="boton-grande" onAction="#abrirNuevoPrestamo"/>
         </VBox>
-    </center>
+    </StackPane>
+</center>
 
     <!-- Barra de estado -->
     <bottom>
