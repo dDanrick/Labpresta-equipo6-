@@ -15,6 +15,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import labpresta.modelo.Equipo;
+import labpresta.modelo.Usuario;
 
 public class PrimaryController {
 
@@ -42,10 +43,21 @@ public class PrimaryController {
             lblEstado.setText("Error: " + e.getMessage());
         }
     }
+    
 
     @FXML
     private void abrirUsuarios() {
-        mostrarMarcador("Usuarios", "HU-C2 Registrar usuarios");
+        try {
+            FXMLLoader loader = new FXMLLoader(PrimaryController.class.getResource("UsuarioFormulario.fxml"));
+            Parent formulario = loader.load();
+            UsuarioFormularioController controlador = loader.getController();
+            controlador.setUsuarios(usuarios);
+            raiz.setCenter(formulario);
+            lblEstado.setText("Usuarios");
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblEstado.setText("Error: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -73,6 +85,7 @@ public class PrimaryController {
     }
     
     private final List<Equipo> equipos = new ArrayList<>();
+    private final List<Usuario> usuarios = new ArrayList<>();
 
 
 
