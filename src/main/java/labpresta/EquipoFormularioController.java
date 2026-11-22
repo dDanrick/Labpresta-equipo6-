@@ -1,16 +1,16 @@
-
 package labpresta;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.ValidadorEquipo;
-
-
 
 public class EquipoFormularioController {
     @FXML private TextField txtCodigo;
@@ -18,16 +18,30 @@ public class EquipoFormularioController {
     @FXML private TextField txtDescripcion;
     @FXML private Label lblMensaje;
 
-    // Lista de equipos registrados. PrimaryController la entrega al abrir la pantalla.
+    @FXML private TableView<Equipo> tablaEquipos;
+    @FXML private TableColumn<Equipo, String> colCodigo;
+    @FXML private TableColumn<Equipo, String> colTipo;
+    @FXML private TableColumn<Equipo, String> colDescripcion;
+    @FXML private TableColumn<Equipo, String> colEstado;
+
+   
     private List<Equipo> equipos = new ArrayList<>();
 
     public void setEquipos(List<Equipo> equipos) {
         this.equipos = equipos;
+        actualizarTabla();
     }
 
     @FXML
     private void initialize() {
         cmbTipo.getItems().addAll(ValidadorEquipo.TIPOS_VALIDOS);
+
+       
+        colCodigo.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getCodigo()));
+        colTipo.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getTipo()));
+        colDescripcion.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getDescripcion()));
+        colEstado.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getEstado()));
+        tablaEquipos.setPlaceholder(new Label("No hay equipos registrados."));
     }
 
     @FXML
@@ -44,8 +58,14 @@ public class EquipoFormularioController {
         equipos.add(equipo);
         // Pendiente (tarea de guardado): escribir la lista en equipos.csv.
 
+        actualizarTabla();
         mostrarMensaje("Equipo registrado correctamente.");
         limpiar();
+    }
+
+    public void actualizarTabla() {
+        tablaEquipos.getItems().setAll(equipos);
+        tablaEquipos.refresh();
     }
 
     private void limpiar() {
