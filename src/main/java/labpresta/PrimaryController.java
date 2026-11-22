@@ -16,7 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.Usuario;
-
+import labpresta.datos.UsuarioCSV; 
 public class PrimaryController {
 
     @FXML private BorderPane raiz;
@@ -85,8 +85,7 @@ public class PrimaryController {
     }
     
     private final List<Equipo> equipos = new ArrayList<>();
-    private final List<Usuario> usuarios = new ArrayList<>();
-
+    private final List<Usuario> usuarios = new ArrayList<>(new UsuarioCSV().cargar());
 
 
     /** Reemplaza el panel central por un marcador de la pantalla que irá ahí. */

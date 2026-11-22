@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import labpresta.modelo.Usuario;
 import labpresta.modelo.ValidadorUsuario;
+import labpresta.datos.UsuarioCSV; 
 
 public class UsuarioFormularioController {
     @FXML private TextField txtCedula;
@@ -51,8 +52,10 @@ public class UsuarioFormularioController {
 
         usuarios.add(new Usuario(txtCedula.getText(), txtNombre.getText(),
                 cmbTipo.getValue(), txtTelefono.getText()));
-        // Pendiente (tarea de guardado): escribir la lista en usuarios.csv.
-
+                     if (!new UsuarioCSV().guardar(usuarios)) {
+            lblMensaje.setText("No se pudo guardar el archivo usuarios.csv");
+            return;
+        }
         refrescarLista();
         lblMensaje.setText("Usuario guardado correctamente");
         limpiar();
