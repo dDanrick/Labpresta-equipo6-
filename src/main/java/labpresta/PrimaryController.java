@@ -1,5 +1,6 @@
 package labpresta;
 
+import labpresta.modelo.ArchivoEquipos;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.application.Platform;
@@ -84,7 +85,7 @@ public class PrimaryController {
         Platform.exit();
     }
     
-    private final List<Equipo> equipos = new ArrayList<>();
+    private final List<Equipo> equipos = ArchivoEquipos.leer();
     private final List<Usuario> usuarios = new ArrayList<>();
 
 

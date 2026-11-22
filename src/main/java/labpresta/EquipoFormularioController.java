@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.ValidadorEquipo;
 import javafx.scene.control.Alert;
+import labpresta.modelo.ArchivoEquipos;
 
 public class EquipoFormularioController {
     @FXML private TextField txtCodigo;
@@ -106,4 +107,11 @@ public class EquipoFormularioController {
     private void aviso(String texto) {
         new Alert(Alert.AlertType.WARNING, texto).showAndWait();
     }
+            private void guardarEnArchivo() {
+        try {
+            ArchivoEquipos.guardar(equipos);
+        } catch (java.io.IOException ex) {
+            aviso("No se pudo guardar en equipos.csv: " + ex.getMessage());
+        }
+        }
 }
