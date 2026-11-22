@@ -10,7 +10,7 @@ public class Equipo {
     private final String codigo;
     private String tipo;
     private String descripcion;
-    private String estado;
+    private String estado = "Disponible";
 
     public Equipo(String codigo, String tipo, String descripcion) {
         this.codigo = codigo != null ? codigo.trim().toUpperCase() : "";
