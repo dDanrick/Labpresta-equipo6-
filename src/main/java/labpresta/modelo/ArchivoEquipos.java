@@ -11,7 +11,7 @@ import java.util.List;
 
 // HU-C1 · Guardar y leer equipos en CSV
 public class ArchivoEquipos {
-    private static final Path RUTA = Paths.get("datos", "equipos.csv");
+    private static final Path RUTA = Paths.get("data", "equipos.csv");
     private static final String ENCABEZADO = "codigo;tipo;descripcion;estado";
 
     /** Lee los equipos del CSV. Si el archivo no existe, devuelve una lista vacía. */
