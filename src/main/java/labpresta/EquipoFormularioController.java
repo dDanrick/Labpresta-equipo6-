@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.ValidadorEquipo;
+import javafx.scene.control.Alert;
 
 public class EquipoFormularioController {
     @FXML private TextField txtCodigo;
@@ -76,5 +77,33 @@ public class EquipoFormularioController {
 
     private void mostrarMensaje(String texto) {
         lblMensaje.setText(texto);
+    }
+    
+        // HU-C1 · Marcar en mantenimiento o devolver a disponible
+    @FXML
+    private void marcarMantenimiento() {
+        Equipo e = tablaEquipos.getSelectionModel().getSelectedItem();
+        if (e == null) { aviso("Selecciona un equipo de la tabla."); return; }
+        if (Equipo.ESTADO_PRESTADO.equals(e.getEstado())) { aviso("No se puede: el equipo está prestado."); return; }
+        if (Equipo.ESTADO_MANTENIMIENTO.equals(e.getEstado())) { aviso("El equipo ya está en mantenimiento."); return; }
+        e.marcarEnMantenimiento();
+        // Pendiente (tarea de guardado): escribir la lista en equipos.csv.
+        actualizarTabla();
+        mostrarMensaje("Equipo " + e.getCodigo() + " marcado en mantenimiento.");
+    }
+
+    @FXML
+    private void devolverDisponible() {
+        Equipo e = tablaEquipos.getSelectionModel().getSelectedItem();
+        if (e == null) { aviso("Selecciona un equipo de la tabla."); return; }
+        if (!Equipo.ESTADO_MANTENIMIENTO.equals(e.getEstado())) { aviso("Solo se devuelven a disponible los equipos en mantenimiento."); return; }
+        e.marcarDisponible();
+        // Pendiente (tarea de guardado): escribir la lista en equipos.csv.
+        actualizarTabla();
+        mostrarMensaje("Equipo " + e.getCodigo() + " disponible otra vez.");
+    }
+
+    private void aviso(String texto) {
+        new Alert(Alert.AlertType.WARNING, texto).showAndWait();
     }
 }

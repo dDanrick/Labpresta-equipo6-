@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <VBox spacing="10" prefWidth="420" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labpresta.EquipoFormularioController">
    <padding>
@@ -38,4 +39,8 @@
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
    </TableView>
+    <HBox spacing="10" alignment="CENTER">
+      <Button text="🔧 Marcar en mantenimiento" onAction="#marcarMantenimiento" />
+      <Button text="✅ Devolver a disponible" onAction="#devolverDisponible" />
+   </HBox>
 </VBox>
