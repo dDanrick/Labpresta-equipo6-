@@ -8,9 +8,11 @@ public class ValidadorUsuario {
      * Valida los datos de un nuevo usuario antes de registrarlo.
      *
      * @return null si todo es válido, o el mensaje de error para mostrar en pantalla
+     * 
      */
     public static String validarNuevoUsuario(String cedula, String nombre, String tipo,
                                              String telefono, List<Usuario> existentes) {
+
         if (cedula == null || cedula.isBlank()
                 || nombre == null || nombre.isBlank()
                 || telefono == null || telefono.isBlank()) {
@@ -19,11 +21,11 @@ public class ValidadorUsuario {
         if (tipo == null || tipo.isBlank()) {
             return "Seleccione el tipo de usuario";
         }
-        if (!soloNumeros(cedula)) {
-            return "La cédula debe contener solo números.";
+        if (!tieneDiezDigitos(cedula)) {
+            return "La cédula debe tener exactamente 10 dígitos numéricos.";
         }
-        if (!soloNumeros(telefono)) {
-            return "El teléfono debe contener solo números.";
+        if (!tieneDiezDigitos(telefono)) {
+            return "El teléfono debe tener exactamente 10 dígitos numéricos.";
         }
         if (existeCedula(cedula, existentes)) {
             return "Número de cédula existente";
@@ -44,7 +46,7 @@ public class ValidadorUsuario {
         return false;
     }
 
-    private static boolean soloNumeros(String texto) {
-        return texto.trim().matches("\\d+");
+    private static boolean tieneDiezDigitos(String texto) {
+        return texto.trim().matches("\\d{10}");
     }
 }
