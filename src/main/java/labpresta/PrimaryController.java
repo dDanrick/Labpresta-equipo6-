@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.Usuario;
+import labpresta.datos.UsuarioCSV;
 
 public class PrimaryController {
 
@@ -86,7 +87,7 @@ public class PrimaryController {
     }
     
     private final List<Equipo> equipos = ArchivoEquipos.leer();
-    private final List<Usuario> usuarios = new ArrayList<>();
+    private final List<Usuario> usuarios = new ArrayList<>(new UsuarioCSV().cargar());
 
 
 
