@@ -1,4 +1,3 @@
-
 package labpresta;
 
 import java.util.ArrayList;
@@ -20,7 +19,10 @@ public class UsuarioFormularioController {
     @FXML private Label lblMensaje;
     @FXML private ListView<Usuario> lstUsuarios;
 
-    // Lista de usuarios registrados. PrimaryController la entrega al abrir la pantalla.
+
+    @FXML private TextField txtBuscar;
+
+   
     private List<Usuario> usuarios = new ArrayList<>();
 
     public void setUsuarios(List<Usuario> usuarios) {
@@ -31,6 +33,9 @@ public class UsuarioFormularioController {
     @FXML
     private void initialize() {
         cmbTipo.getItems().addAll(Usuario.TIPO_ESTUDIANTE, Usuario.TIPO_DOCENTE);
+
+        // HU-C2 · Cada vez que se escribe en el buscador, se filtra la lista
+        txtBuscar.textProperty().addListener((obs, anterior, nuevo) -> refrescarLista());
     }
 
     @FXML
@@ -53,8 +58,30 @@ public class UsuarioFormularioController {
         limpiar();
     }
 
+
     private void refrescarLista() {
-        lstUsuarios.setItems(FXCollections.observableArrayList(usuarios));
+        String texto = txtBuscar.getText() == null ? "" : txtBuscar.getText().trim().toLowerCase();
+        List<Usuario> resultado = new ArrayList<>();
+
+        for (Usuario usuario : usuarios) {
+            if (coincide(usuario, texto)) {
+                resultado.add(usuario);
+            }
+        }
+
+        lstUsuarios.setItems(FXCollections.observableArrayList(resultado));
+        lstUsuarios.setPlaceholder(new Label(texto.isEmpty()
+                ? "No hay usuarios registrados."
+                : "No se encontraron usuarios con \"" + txtBuscar.getText().trim() + "\"."));
+    }
+
+
+    private boolean coincide(Usuario usuario, String texto) {
+        if (texto.isEmpty()) {
+            return true;
+        }
+        return usuario.getCedula().contains(texto)
+                || usuario.getNombre().toLowerCase().contains(texto);
     }
 
     private void limpiar() {
