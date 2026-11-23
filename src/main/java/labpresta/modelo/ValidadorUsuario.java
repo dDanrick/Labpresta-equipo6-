@@ -21,6 +21,9 @@ public class ValidadorUsuario {
         if (tipo == null || tipo.isBlank()) {
             return "Seleccione el tipo de usuario";
         }
+        if (!esNombreCompleto(nombre)) {
+            return "Ingrese el nombre y el apellido, solo con letras.";
+        }
         if (!tieneDiezDigitos(cedula)) {
             return "La cédula debe tener exactamente 10 dígitos numéricos.";
         }
@@ -48,5 +51,8 @@ public class ValidadorUsuario {
 
     private static boolean tieneDiezDigitos(String texto) {
         return texto.trim().matches("\\d{10}");
+    }
+    private static boolean esNombreCompleto(String texto) {
+        return texto.trim().matches("\\p{L}+(\\s+\\p{L}+)+");
     }
 }
