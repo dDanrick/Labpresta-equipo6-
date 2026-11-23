@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>25-ea+21</version>
+            <version>13</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -69,17 +69,17 @@
                         <id>ide-profile</id>
                         <configuration>
                             <options>
-				<option>${profiler.jvmargs.arg1}</option>
-				<option>${profiler.jvmargs.arg2}</option>
-				<option>${profiler.jvmargs.arg3}</option>
-				<option>${profiler.jvmargs.arg4}</option>
-				<option>${profiler.jvmargs.arg5}</option>
+                                <option>${profiler.jvmargs.arg1}</option>
+                                <option>${profiler.jvmargs.arg2}</option>
+                                <option>${profiler.jvmargs.arg3}</option>
+                                <option>${profiler.jvmargs.arg4}</option>
+                                <option>${profiler.jvmargs.arg5}</option>
                             </options>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-        <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.5.1</version>
@@ -97,7 +97,7 @@
                             </transformers>
                             <filters>
                                 <filter>
-                                    <artifact>*:*</artifact>
+                                    <artifact>:</artifact>
                                     <excludes>
                                         <exclude>module-info.class</exclude>
                                         <exclude>META-INF/*.SF</exclude>

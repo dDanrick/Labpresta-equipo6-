@@ -1,5 +1,6 @@
 package labpresta;
 
+import labpresta.modelo.ArchivoEquipos;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.application.Platform;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.Usuario;
+import labpresta.datos.UsuarioCSV;
 
 public class PrimaryController {
 
@@ -84,8 +86,8 @@ public class PrimaryController {
         Platform.exit();
     }
     
-    private final List<Equipo> equipos = new ArrayList<>();
-    private final List<Usuario> usuarios = new ArrayList<>();
+    private final List<Equipo> equipos = ArchivoEquipos.leer();
+    private final List<Usuario> usuarios = new ArrayList<>(new UsuarioCSV().cargar());
 
 
 

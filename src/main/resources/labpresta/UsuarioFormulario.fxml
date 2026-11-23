@@ -24,5 +24,9 @@
    <Button text="Guardar" onAction="#guardar" />
    <Label fx:id="lblMensaje" wrapText="true" />
    <Label text="Usuarios registrados" style="-fx-font-weight: bold;" />
-   <ListView fx:id="lstUsuarios" prefHeight="180" />
+
+   <!-- HU-C2 · Buscar por cédula o parte del nombre -->
+   <TextField fx:id="txtBuscar" promptText="Buscar por cédula o parte del nombre" />
+
+   <ListView fx:id="lstUsuarios" prefHeight="180" VBox.vgrow="ALWAYS" />
 </VBox>
