@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" prefWidth="420" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labpresta.PrestamoFormularioController">
+   <padding>
+      <Insets top="20" right="20" bottom="20" left="20" />
+   </padding>
+   <Label text="Registrar préstamo" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+   <Label text="Usuario" />
+   <ComboBox fx:id="cmbUsuario" maxWidth="Infinity" promptText="Seleccione el usuario" />
+   <Label text="Equipo" />
+   <ComboBox fx:id="cmbEquipo" maxWidth="Infinity" promptText="Seleccione un equipo disponible" />
+   <Label text="Fecha de préstamo" />
+   <DatePicker fx:id="dpFecha" maxWidth="Infinity" />
+   <Button text="Registrar préstamo" onAction="#guardar" />
+   <Label fx:id="lblMensaje" wrapText="true" />
+</VBox>

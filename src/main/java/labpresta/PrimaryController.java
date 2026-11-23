@@ -64,7 +64,17 @@ public class PrimaryController {
 
     @FXML
     private void abrirNuevoPrestamo() {
-        mostrarMarcador("Nuevo préstamo", "HU-C3 Prestar equipo");
+        try {
+            FXMLLoader loader = new FXMLLoader(PrimaryController.class.getResource("PrestamoFormulario.fxml"));
+            Parent formulario = loader.load();
+            PrestamoFormularioController controlador = loader.getController();
+            controlador.setDatos(usuarios, equipos);
+            raiz.setCenter(formulario);
+            lblEstado.setText("Nuevo préstamo");
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblEstado.setText("Error: " + e.getMessage());
+            }
     }
 
     @FXML
