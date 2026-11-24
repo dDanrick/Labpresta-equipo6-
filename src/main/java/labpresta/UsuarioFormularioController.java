@@ -11,6 +11,10 @@ import javafx.scene.control.TextField;
 import labpresta.modelo.Usuario;
 import labpresta.modelo.ValidadorUsuario;
 import labpresta.datos.UsuarioCSV; 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 
 public class UsuarioFormularioController {
     @FXML private TextField txtCedula;
@@ -18,7 +22,11 @@ public class UsuarioFormularioController {
     @FXML private ComboBox<String> cmbTipo;
     @FXML private TextField txtTelefono;
     @FXML private Label lblMensaje;
-    @FXML private ListView<Usuario> lstUsuarios;
+    @FXML private TableView<Usuario> tablaUsuarios;
+    @FXML private TableColumn<Usuario, String> colCedula;
+    @FXML private TableColumn<Usuario, String> colNombre;
+    @FXML private TableColumn<Usuario, String> colTipo;
+    @FXML private TableColumn<Usuario, String> colTelefono;
 
 
     @FXML private TextField txtBuscar;
@@ -71,9 +79,14 @@ public class UsuarioFormularioController {
                 resultado.add(usuario);
             }
         }
+                // HU-C2 · Columnas de la tabla de usuarios
+        colCedula.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getCedula()));
+        colNombre.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNombre()));
+        colTipo.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTipo()));
+        colTelefono.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTelefono()));
 
-        lstUsuarios.setItems(FXCollections.observableArrayList(resultado));
-        lstUsuarios.setPlaceholder(new Label(texto.isEmpty()
+        tablaUsuarios.setItems(FXCollections.observableArrayList(resultado));
+        tablaUsuarios.setPlaceholder(new Label(texto.isEmpty()
                 ? "No hay usuarios registrados."
                 : "No se encontraron usuarios con \"" + txtBuscar.getText().trim() + "\"."));
     }

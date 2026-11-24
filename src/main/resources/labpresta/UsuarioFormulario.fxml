@@ -4,9 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 
 <VBox spacing="10" prefWidth="420" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="labpresta.UsuarioFormularioController">
    <padding>
@@ -28,5 +30,15 @@
    <!-- HU-C2 · Buscar por cédula o parte del nombre -->
    <TextField fx:id="txtBuscar" promptText="Buscar por cédula o parte del nombre" />
 
-   <ListView fx:id="lstUsuarios" prefHeight="180" VBox.vgrow="ALWAYS" />
+   <TableView fx:id="tablaUsuarios" prefHeight="200" VBox.vgrow="ALWAYS">
+    <columns>
+      <TableColumn fx:id="colCedula" text="Cédula" prefWidth="110" />
+      <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200" />
+      <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100" />
+      <TableColumn fx:id="colTelefono" text="Teléfono" prefWidth="110" />
+    </columns>
+    <columnResizePolicy>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+    </columnResizePolicy>
+    </TableView>
 </VBox>
