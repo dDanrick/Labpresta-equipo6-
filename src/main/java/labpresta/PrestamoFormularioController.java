@@ -88,6 +88,7 @@ public class PrestamoFormularioController {
             return;
         }
 
+        //HU-C3 Calcular fecha límite (1 o 3 días) (ya lo había hecho, solo me falto hacer un commit solo para esta tarjeta)
         // Fecha límite: 1 día para estudiantes, 3 días para docentes
         LocalDate limite = usuario.esDocente() ? fecha.plusDays(3) : fecha.plusDays(1);
 
