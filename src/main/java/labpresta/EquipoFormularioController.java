@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import labpresta.modelo.ArchivoEquipos;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.ValidadorEquipo;
-import javafx.scene.control.Alert;
-import labpresta.modelo.ArchivoEquipos;
 
 public class EquipoFormularioController {
     @FXML private TextField txtCodigo;
@@ -20,13 +20,13 @@ public class EquipoFormularioController {
     @FXML private TextField txtDescripcion;
     @FXML private Label lblMensaje;
 
+ 
     @FXML private TableView<Equipo> tablaEquipos;
     @FXML private TableColumn<Equipo, String> colCodigo;
     @FXML private TableColumn<Equipo, String> colTipo;
     @FXML private TableColumn<Equipo, String> colDescripcion;
     @FXML private TableColumn<Equipo, String> colEstado;
 
-   
     private List<Equipo> equipos = new ArrayList<>();
 
     public void setEquipos(List<Equipo> equipos) {
@@ -38,7 +38,6 @@ public class EquipoFormularioController {
     private void initialize() {
         cmbTipo.getItems().addAll(ValidadorEquipo.TIPOS_VALIDOS);
 
-       
         colCodigo.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getCodigo()));
         colTipo.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getTipo()));
         colDescripcion.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getDescripcion()));
@@ -64,6 +63,7 @@ public class EquipoFormularioController {
         mostrarMensaje("Equipo registrado correctamente.");
         limpiar();
     }
+
 
     public void actualizarTabla() {
         tablaEquipos.getItems().setAll(equipos);
@@ -108,6 +108,7 @@ public class EquipoFormularioController {
         new Alert(Alert.AlertType.WARNING, texto).showAndWait();
     }
 
+    
     private void guardarEnArchivo() {
         try {
             ArchivoEquipos.guardar(equipos);
