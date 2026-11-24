@@ -111,7 +111,6 @@ public class PrimaryController {
 
 
 
-    /** Reemplaza el panel central por un marcador de la pantalla que irá ahí. */
     private void mostrarMarcador(String titulo, String historia) {
         Label lblTitulo = new Label(titulo);
         lblTitulo.setFont(Font.font("Arial", 18));

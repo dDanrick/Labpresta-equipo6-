@@ -24,14 +24,14 @@ public class PrestamoCSV {
         this.archivo = archivo;
     }
 
-    /** Lee los préstamos guardados. Si el archivo no existe, devuelve una lista vacía. */
+
     public List<Prestamo> cargar() {
         List<Prestamo> prestamos = new ArrayList<>();
         if (!Files.exists(archivo)) {
             return prestamos;
         }
         try (BufferedReader lector = Files.newBufferedReader(archivo, StandardCharsets.UTF_8)) {
-            String linea = lector.readLine(); // salta el encabezado
+            String linea = lector.readLine(); 
             while ((linea = lector.readLine()) != null) {
                 if (linea.isBlank()) {
                     continue;
@@ -48,7 +48,7 @@ public class PrestamoCSV {
         return prestamos;
     }
 
-    /** Guarda toda la lista de préstamos. Devuelve true si se guardó bien. */
+    
     public boolean guardar(List<Prestamo> prestamos) {
         try {
             if (archivo.getParent() != null) {

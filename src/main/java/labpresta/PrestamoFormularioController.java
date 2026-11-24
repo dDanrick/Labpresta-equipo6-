@@ -1,5 +1,6 @@
 package labpresta;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,12 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.util.StringConverter;
-import labpresta.modelo.Equipo;
-import labpresta.modelo.Usuario;
-import java.io.IOException;
 import labpresta.datos.PrestamoCSV;
 import labpresta.modelo.ArchivoEquipos;
+import labpresta.modelo.Equipo;
 import labpresta.modelo.Prestamo;
+import labpresta.modelo.Usuario;
 import labpresta.modelo.ValidadorPrestamo;
 
 public class PrestamoFormularioController {
@@ -37,7 +37,7 @@ public class PrestamoFormularioController {
 
     @FXML
     private void initialize() {
-        
+    
         dpFecha.setValue(LocalDate.now());
         dpFecha.setConverter(new StringConverter<LocalDate>() {
             @Override
@@ -48,7 +48,7 @@ public class PrestamoFormularioController {
             @Override
             public LocalDate fromString(String texto) {
                 try {
-                    return (texto == null || texto.isBlank()) ? null : LocalDate.parse(texto, FORMATO);
+                    return (texto == null || texto.isBlank()) ? null : LocalDate.parse(texto.trim(), FORMATO);
                 } catch (Exception e) {
                     return null;
                 }
@@ -68,11 +68,13 @@ public class PrestamoFormularioController {
         cmbEquipo.getItems().setAll(disponibles);
     }
 
-     @FXML
+
+    @FXML
     private void guardar() {
         Usuario usuario = cmbUsuario.getValue();
         Equipo equipo = cmbEquipo.getValue();
-        LocalDate fecha = dpFecha.getValue();
+       
+        LocalDate fecha = dpFecha.getConverter().fromString(dpFecha.getEditor().getText());
 
         if (usuario == null) {
             lblMensaje.setText("Seleccione el usuario");
@@ -88,8 +90,7 @@ public class PrestamoFormularioController {
             return;
         }
 
-        //HU-C3 Calcular fecha límite (1 o 3 días) (ya lo había hecho, solo me falto hacer un commit solo para esta tarjeta)
-        // Fecha límite: 1 día para estudiantes, 3 días para docentes
+  
         LocalDate limite = usuario.esDocente() ? fecha.plusDays(3) : fecha.plusDays(1);
 
         PrestamoCSV archivo = new PrestamoCSV();
@@ -111,6 +112,8 @@ public class PrestamoFormularioController {
 
         refrescarListas();
         cmbUsuario.setValue(null);
-        lblMensaje.setText("Préstamo registrado. Devolver hasta el " + FORMATO.format(limite));
+        cmbEquipo.setValue(null);
+
+        lblMensaje.setText("Préstamo registrado. Fecha límite: " + FORMATO.format(limite));
     }
 }
