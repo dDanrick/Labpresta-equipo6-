@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.util.StringConverter;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.Usuario;
+import java.io.IOException;
+import labpresta.datos.PrestamoCSV;
+import labpresta.modelo.ArchivoEquipos;
+import labpresta.modelo.Prestamo;
+import labpresta.modelo.ValidadorPrestamo;
 
 public class PrestamoFormularioController {
 
@@ -63,7 +68,7 @@ public class PrestamoFormularioController {
         cmbEquipo.getItems().setAll(disponibles);
     }
 
-    @FXML
+     @FXML
     private void guardar() {
         Usuario usuario = cmbUsuario.getValue();
         Equipo equipo = cmbEquipo.getValue();
@@ -73,8 +78,9 @@ public class PrestamoFormularioController {
             lblMensaje.setText("Seleccione el usuario");
             return;
         }
-        if (equipo == null) {
-            lblMensaje.setText("Seleccione un equipo");
+        String error = ValidadorPrestamo.validarEquipoDisponible(equipo);
+        if (error != null) {
+            lblMensaje.setText(error);
             return;
         }
         if (fecha == null) {
@@ -82,8 +88,28 @@ public class PrestamoFormularioController {
             return;
         }
 
-        // Aqui se aumentara lo que pertenece a las tareas de los demas de HU-C3:
-      
-        lblMensaje.setText("Pantalla lista. Falta conectar el registro del préstamo.");
+        // Fecha límite: 1 día para estudiantes, 3 días para docentes
+        LocalDate limite = usuario.esDocente() ? fecha.plusDays(3) : fecha.plusDays(1);
+
+        PrestamoCSV archivo = new PrestamoCSV();
+        List<Prestamo> prestamos = archivo.cargar();
+        prestamos.add(new Prestamo(equipo.getCodigo(), usuario.getCedula(), fecha, limite));
+
+        if (!archivo.guardar(prestamos)) {
+            lblMensaje.setText("No se pudo guardar prestamos.csv");
+            return;
+        }
+
+        equipo.marcarPrestado();
+        try {
+            ArchivoEquipos.guardar(equipos);
+        } catch (IOException e) {
+            lblMensaje.setText("Préstamo guardado, pero no se pudo actualizar equipos.csv");
+            return;
+        }
+
+        refrescarListas();
+        cmbUsuario.setValue(null);
+        lblMensaje.setText("Préstamo registrado. Devolver hasta el " + FORMATO.format(limite));
     }
 }

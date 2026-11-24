@@ -77,9 +77,19 @@ public class PrimaryController {
             }
     }
 
-    @FXML
+        @FXML
     private void abrirDevolucion() {
-        mostrarMarcador("Devolución", "HU-C3 Recibir equipo");
+        try {
+            FXMLLoader loader = new FXMLLoader(PrimaryController.class.getResource("DevolucionFormulario.fxml"));
+            Parent formulario = loader.load();
+            DevolucionController controlador = loader.getController();
+            controlador.setDatos(equipos, usuarios);
+            raiz.setCenter(formulario);
+            lblEstado.setText("Devolución");
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblEstado.setText("Error: " + e.getMessage());
+        }
     }
 
     @FXML
