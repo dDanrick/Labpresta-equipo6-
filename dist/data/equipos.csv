@@ -1,0 +1,9 @@
+codigo;tipo;descripcion;estado
+LAP-01;Laptop;Dell Latitude 5420;Prestado
+LAP-02;Laptop;HP ProBook 450;Disponible
+LAP-03;Laptop;Lenovo ThinkPad E14;En mantenimiento
+PRO-01;Proyector;Epson PowerLite X49;Prestado
+PRO-02;Proyector;BenQ MS560;Disponible
+ARD-01;Kit Arduino;Arduino Uno R3 con sensores;Disponible
+ARD-02;Kit Arduino;Arduino Mega 2560;Disponible
+OTR-01;Otro;Cable HDMI de 3 m;Disponible
