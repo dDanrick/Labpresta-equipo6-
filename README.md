@@ -3,7 +3,9 @@
 **Equipo:** Equipo 6
 **Escenario:** C – LabPresta
 **Materia:** ISID432 Desarrollo y Mantenimiento de Software · Escuela Politécnica Nacional
+
 **Repositorio:** https://github.com/dDanrick/Labpresta-equipo6-
+
 **Tablero de Trello:** https://trello.com/invite/b/6aff97bab309f1902bddacc1/ATTIdc84f10527a069fbb3cc73dc34173f110E83F90A/lebpresta
 
 ## Descripción
