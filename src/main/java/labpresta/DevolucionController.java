@@ -16,8 +16,13 @@ import labpresta.modelo.ArchivoEquipos;
 import labpresta.modelo.Equipo;
 import labpresta.modelo.Prestamo;
 import labpresta.modelo.Usuario;
+import java.time.format.DateTimeFormatter;
+import javafx.scene.control.DatePicker;
+import javafx.util.StringConverter;
 
 public class DevolucionController {
+    
+    private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @FXML private TableView<Prestamo> tablaPrestamos;
     @FXML private TableColumn<Prestamo, String> colEquipo;
@@ -25,6 +30,7 @@ public class DevolucionController {
     @FXML private TableColumn<Prestamo, String> colNombre;
     @FXML private TableColumn<Prestamo, String> colFechaPrestamo;
     @FXML private TableColumn<Prestamo, String> colFechaLimite;
+    @FXML private DatePicker dpFecha;
     @FXML private Label lblMensaje;
 
     private final PrestamoCSV archivoPrestamos = new PrestamoCSV();
@@ -48,6 +54,23 @@ public class DevolucionController {
         colFechaPrestamo.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getFechaPrestamo())));
         colFechaLimite.setCellValueFactory(d -> new SimpleStringProperty(String.valueOf(d.getValue().getFechaLimite())));
         tablaPrestamos.setPlaceholder(new Label("No hay préstamos activos."));
+        
+        dpFecha.setValue(LocalDate.now());
+        dpFecha.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate fecha) {
+                return fecha == null ? "" : FORMATO.format(fecha);
+            }
+
+            @Override
+            public LocalDate fromString(String texto) {
+                try {
+                    return (texto == null || texto.isBlank()) ? null : LocalDate.parse(texto, FORMATO);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        });
     }
 
     @FXML
@@ -58,7 +81,17 @@ public class DevolucionController {
             return;
         }
 
-        seleccionado.setFechaDevolucion(LocalDate.now());
+        LocalDate fecha = dpFecha.getValue();
+        if (fecha == null) {
+            lblMensaje.setText("Ingrese una fecha válida (dd/MM/yyyy).");
+            return;
+        }
+        if (fecha.isBefore(seleccionado.getFechaPrestamo())) {
+            lblMensaje.setText("La fecha de devolución no puede ser anterior a la del préstamo.");
+            return;
+        }
+
+        seleccionado.setFechaDevolucion(fecha);
 
         Equipo equipo = buscarEquipo(seleccionado.getCodigoEquipo());
         if (equipo != null) {
@@ -79,7 +112,7 @@ public class DevolucionController {
         }
 
         actualizarTabla();
-        lblMensaje.setText("Devolución registrada: equipo " + seleccionado.getCodigoEquipo() + " disponible.");
+        lblMensaje.setText("Devolución registrada");
     }
 
     /** Muestra solo los préstamos que no se han devuelto. */
