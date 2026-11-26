@@ -14,7 +14,7 @@ LabPresta es una aplicación de escritorio en Java que reemplaza la hoja de pape
 ## Integrantes
 | Integrante | Rol | Usuario de GitHub |
 |---|---|---|
-|  | Product Owner |  |
+| Ing. Marcela Mosquera | Product Owner |  |
 | Josselyn Pauta | Scrum Master | @Jose-Pau2307 |
 | Valeria Zapata | Desarrolladora | @Vaalxl |
 | Génesis Tufiño | Desarrolladora | @Genetb10|
