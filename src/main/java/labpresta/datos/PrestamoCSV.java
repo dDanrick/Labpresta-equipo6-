@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import labpresta.modelo.Prestamo;
@@ -17,7 +16,8 @@ public class PrestamoCSV {
     private final Path archivo;
 
     public PrestamoCSV() {
-        this(Paths.get("data", "prestamos.csv"));
+        // Carpeta data junto al .jar (ver RutaDatos)
+        this(RutaDatos.archivo("prestamos.csv"));
     }
 
     public PrestamoCSV(Path archivo) {

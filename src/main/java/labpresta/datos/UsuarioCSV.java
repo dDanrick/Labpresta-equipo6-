@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import labpresta.modelo.Usuario;
@@ -18,14 +17,14 @@ public class UsuarioCSV {
     private final Path archivo;
 
     public UsuarioCSV() {
-        this(Paths.get("data", "usuarios.csv"));
+        this(RutaDatos.archivo("usuarios.csv"));
     }
 
     public UsuarioCSV(Path archivo) {
         this.archivo = archivo;
     }
 
-    /** Lee los usuarios guardados. Si el archivo aún no existe, devuelve una lista vacía. */
+
     public List<Usuario> cargar() {
         List<Usuario> usuarios = new ArrayList<>();
         if (!Files.exists(archivo)) {
@@ -49,7 +48,7 @@ public class UsuarioCSV {
         return usuarios;
     }
 
-    /** Guarda toda la lista de usuarios. Devuelve true si se guardó bien. */
+ 
     public boolean guardar(List<Usuario> usuarios) {
         try {
             if (archivo.getParent() != null) {

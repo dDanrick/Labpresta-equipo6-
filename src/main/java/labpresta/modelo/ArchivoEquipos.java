@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import labpresta.datos.RutaDatos;
 
 
-// HU-C1 · Guardar y leer equipos en CSV
 public class ArchivoEquipos {
-    private static final Path RUTA = Paths.get("data", "equipos.csv");
+
+    private static final Path RUTA = RutaDatos.archivo("equipos.csv");
     private static final String ENCABEZADO = "codigo;tipo;descripcion;estado";
 
-    /** Lee los equipos del CSV. Si el archivo no existe, devuelve una lista vacía. */
+    
     public static List<Equipo> leer() {
         List<Equipo> equipos = new ArrayList<>();
         if (!Files.exists(RUTA)) {
@@ -38,7 +38,7 @@ public class ArchivoEquipos {
         return equipos;
     }
 
-    /** Sobrescribe el CSV con la lista actual de equipos. */
+
     public static void guardar(List<Equipo> equipos) throws IOException {
         Files.createDirectories(RUTA.getParent());
         List<String> lineas = new ArrayList<>();
