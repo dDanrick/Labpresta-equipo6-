@@ -15,7 +15,7 @@
    <Label text="Usuario" />
    <ComboBox fx:id="cmbUsuario" maxWidth="Infinity" promptText="Seleccione el usuario" />
    <Label text="Equipo" />
-   <ComboBox fx:id="cmbEquipo" maxWidth="Infinity" promptText="Seleccione un equipo disponible" />
+   <ComboBox fx:id="cmbEquipo" maxWidth="Infinity" promptText="Seleccione un equipo" />
    <Label text="Fecha de préstamo" />
    <DatePicker fx:id="dpFecha" maxWidth="Infinity" />
    <Button text="Registrar préstamo" onAction="#guardar" />

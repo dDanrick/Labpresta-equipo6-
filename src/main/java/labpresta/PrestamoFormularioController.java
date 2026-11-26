@@ -37,7 +37,7 @@ public class PrestamoFormularioController {
 
     @FXML
     private void initialize() {
-    
+     
         dpFecha.setValue(LocalDate.now());
         dpFecha.setConverter(new StringConverter<LocalDate>() {
             @Override
@@ -56,16 +56,10 @@ public class PrestamoFormularioController {
         });
     }
 
+   
     private void refrescarListas() {
         cmbUsuario.getItems().setAll(usuarios);
-
-        List<Equipo> disponibles = new ArrayList<>();
-        for (Equipo equipo : equipos) {
-            if (equipo.estaDisponible()) {
-                disponibles.add(equipo);
-            }
-        }
-        cmbEquipo.getItems().setAll(disponibles);
+        cmbEquipo.getItems().setAll(equipos);
     }
 
 
@@ -73,13 +67,14 @@ public class PrestamoFormularioController {
     private void guardar() {
         Usuario usuario = cmbUsuario.getValue();
         Equipo equipo = cmbEquipo.getValue();
-       
+     
         LocalDate fecha = dpFecha.getConverter().fromString(dpFecha.getEditor().getText());
 
         if (usuario == null) {
             lblMensaje.setText("Seleccione el usuario");
             return;
         }
+
         String error = ValidadorPrestamo.validarEquipoDisponible(equipo);
         if (error != null) {
             lblMensaje.setText(error);
@@ -92,6 +87,7 @@ public class PrestamoFormularioController {
 
   
         LocalDate limite = usuario.esDocente() ? fecha.plusDays(3) : fecha.plusDays(1);
+
 
         PrestamoCSV archivo = new PrestamoCSV();
         List<Prestamo> prestamos = archivo.cargar();
