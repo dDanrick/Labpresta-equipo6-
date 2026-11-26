@@ -11,28 +11,21 @@ public class ValidadorEquipo {
             "Otro"
     );
 
-    /**
-     * Valida los datos de un nuevo equipo antes de registrarlo.
-     *
-     * @param codigo      Código del equipo (ej. LAP-01)
-     * @param tipo        Tipo del equipo (Laptop, Proyector, Kit Arduino, Otro)
-     * @param descripcion Descripción del equipo
-     * @param existentes  Lista actual de equipos registrados (puede ser null o vacía)
-     * @return null si todos los datos son válidos, o un mensaje claro de error para mostrar en pantalla
-     */
     public static String validarNuevoEquipo(String codigo, String tipo, String descripcion, List<Equipo> existentes) {
+     
+        if ((codigo == null || codigo.isBlank())
+                && (tipo == null || tipo.isBlank())
+                && (descripcion == null || descripcion.isBlank())) {
+            return "Todos los campos son obligatorios.";
+        }
         if (codigo == null || codigo.isBlank()) {
             return "El codigo del equipo es obligatorio.";
         }
         if (tipo == null || tipo.isBlank()) {
-            return "Debe seleccionar o ingresar el tipo de equipo.";
+            return "Debe seleccionar el tipo de equipo.";
         }
         if (descripcion == null || descripcion.isBlank()) {
             return "La descripcion del equipo es obligatoria.";
-        }
-
-        if (!esTipoValido(tipo)) {
-            return "Tipo de equipo no valido. Los tipos permitidos son: Laptop, Proyector, Kit Arduino u Otro.";
         }
 
         String codigoNormalizado = codigo.trim();
@@ -68,5 +61,4 @@ public class ValidadorEquipo {
         }
         return false;
     }
-    
 }
